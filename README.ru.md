@@ -16,8 +16,9 @@
 ```bash
 git clone https://github.com/codingoleg/Almaviva_VAC_auto_appointment.git
 ```
-2. Установите необходимые библиотеки Python:
+2. Перейдите в него и установите необходимые библиотеки Python:
 ```bash
+cd .\Almaviva_VAC_auto_appointment\
 pip install -r requirements.txt
 ```
 

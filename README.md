@@ -1,6 +1,6 @@
 # Almaviva VAC auto appointment
 
-[Switch to Russian README](https://github.com/codingoleg/Almaviva_VAC_auto_appointment/blob/main/README.ru.md)\
+[Switch to Russian README](https://github.com/codingoleg/Almaviva_VAC_auto_appointment/blob/master/README.ru.md)\
 This script allows you to search for free spots and sign up at the visa 
 application center to apply for a visa to Italy through the site 
 https://ru.almaviva-visa.services.\
@@ -18,8 +18,9 @@ Applying for another visas' types and adding services is not included yet.\
 ```bash
 git clone https://github.com/codingoleg/Almaviva_VAC_auto_appointment.git
 ```
-2. Install required Python libraries:
+2. Go inside and install required Python libraries:
 ```bash
+cd .\Almaviva_VAC_auto_appointment\
 pip install -r requirements.txt
 ```
 
