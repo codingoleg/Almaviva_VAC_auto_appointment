@@ -11,8 +11,8 @@ At present time the script can only apply
 for the touristic visa without any services (see the screenshots) and cash
 payment method. Applying for another visas' or payment method types and adding 
 services is not included yet.\
-<img src="./pics/tourism_visa.jpg" width=75% height=75%>\
-<img src="./pics/services.jpg" width=75% height=75%>
+<img src="./pics/tourism_visa.jpg" width=65% height=65%>\
+<img src="./pics/services.jpg" width=65% height=65%>
 
 ## Installation
 1. Clone this repo:
@@ -88,7 +88,7 @@ was successfully created.', as well as the date and time of the appointment.
 appointment.check_appointment()
 ```
 or at https://ru.almaviva-visa.services/profile/appointment \
-<img src="./pics/check_appointment.jpg" width=75% height=75%>
+<img src="./pics/check_appointment.jpg" width=80% height=80%>
 
 ## Contributing
 Bug reports or pull requests are welcome

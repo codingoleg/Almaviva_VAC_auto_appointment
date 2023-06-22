@@ -8,8 +8,8 @@
 В настоящее время скрипт запрашивает только туристическую визу без 
 дополнительных услуг (см. скриншоты ниже) c оплатой наличными. Подача на другие
 типы виз, оплаты и дополнительные услуги пока не предусмотрены.\
-<img src="./pics/tourism_visa.jpg" width=75% height=75%>\
-<img src="./pics/services.jpg" width=75% height=75%>
+<img src="./pics/tourism_visa.jpg" width=65% height=65%>\
+<img src="./pics/services.jpg" width=65% height=65%>
 
 ## Installation
 1. Клонируйте репозиторий:
@@ -86,7 +86,7 @@ successfully created.', а также дату и время записи.
 appointment.check_appointment()
 ```
 или на https://ru.almaviva-visa.services/profile/appointment \
-<img src="./pics/check_appointment.jpg" width=75% height=75%>
+<img src="./pics/check_appointment.jpg" width=80% height=80%>
 
 ## Contributing
 Баг репорты и пул реквесты приветствуются
