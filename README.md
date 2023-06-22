@@ -8,8 +8,9 @@ The script sends requests to the API and sees free spots, even if there are
 none on the site. (It was empirically established that, if these 'invisible' 
 intervals exist, successful appointment is possible, but unlikely.)\
 At present time the script can only apply 
-for the touristic visa without any services (see the screenshots).
-Applying for another visas' types and adding services is not included yet.\
+for the touristic visa without any services (see the screenshots) and cash
+payment method. Applying for another visas' or payment method types and adding 
+services is not included yet.\
 <img src="./pics/tourism_visa.jpg" width=75% height=75%>\
 <img src="./pics/services.jpg" width=75% height=75%>
 
