@@ -3,15 +3,15 @@
 [Switch to Russian README](https://github.com/codingoleg/Almaviva_VAC_auto_appointment/blob/master/README.ru.md)\
 This script allows you to search for free spots and sign up at the visa 
 application center to apply for a visa to Italy through the site 
-https://ru.almaviva-visa.services.\
+https://ru.almaviva-visa.services. \
 The script sends requests to the API and sees free spots, even if there are 
 none on the site. (It was empirically established that, if these 'invisible' 
 intervals exist, successful appointment is possible, but unlikely.)\
 At present time the script can only apply 
 for the touristic visa without any services (see the screenshots).
 Applying for another visas' types and adding services is not included yet.\
-<img src="./pics/tourism_visa.jpg" width=50% height=50%>\
-<img src="./pics/services.jpg" width=50% height=50%>
+<img src="./pics/tourism_visa.jpg" width=75% height=75%>\
+<img src="./pics/services.jpg" width=75% height=75%>
 
 ## Installation
 1. Clone this repo:
@@ -80,13 +80,14 @@ python main.py
 The process may take from a few seconds to several days depending on the free 
 spots availability.\
 If the appointment is successful, you will receive the message 'The appointment
-was successfully created.', as well as the date and time of the appointment. 
+was successfully created.', as well as the date and time of the appointment.
+
 6. You can check your appointment via command
 ```bash
 appointment.check_appointment()
 ```
 or at https://ru.almaviva-visa.services/profile/appointment \
-<img src="./pics/check_appointment.jpg" width=50% height=50%>
+<img src="./pics/check_appointment.jpg" width=75% height=75%>
 
 ## Contributing
 Bug reports or pull requests are welcome

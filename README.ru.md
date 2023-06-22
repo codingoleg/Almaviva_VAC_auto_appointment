@@ -1,15 +1,15 @@
 # Almaviva VAC auto appointment
 
 Скрипт позволяет искать свободные места и регистрироваться в визовый центр для 
-запроса визы в Италию через сайт https://ru.almaviva-visa.services.\
+запроса визы в Италию через сайт https://ru.almaviva-visa.services. \
 Скрипт посылает запрос по API и видит свободные места, даже если на сайте их 
 нет. (Эмпирическим путем установлено, что при наличии таких "невидимых" мест 
 успешная запись возможна, но маловероятна).\
 В настоящее время скрипт запрашивает только туристическую визу без 
 дополнительных услуг (см. скриншоты ниже). Подача на другие типы виз и 
-дополнительные услуги пока не предусмотрены. \
-<img src="./pics/tourism_visa.jpg" width=50% height=50%>\
-<img src="./pics/services.jpg" width=50% height=50%>
+дополнительные услуги пока не предусмотрены.\
+<img src="./pics/tourism_visa.jpg" width=75% height=75%>\
+<img src="./pics/services.jpg" width=75% height=75%>
 
 ## Installation
 1. Клонируйте репозиторий:
@@ -85,7 +85,7 @@ successfully created.', а также дату и время записи.
 appointment.check_appointment()
 ```
 или на https://ru.almaviva-visa.services/profile/appointment \
-<img src="./pics/check_appointment.jpg" width=50% height=50%>
+<img src="./pics/check_appointment.jpg" width=75% height=75%>
 
 ## Contributing
 Баг репорты и пул реквесты приветствуются
