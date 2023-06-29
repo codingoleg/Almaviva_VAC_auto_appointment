@@ -69,8 +69,8 @@ class Driver:
 class Appointment:
     @staticmethod
     def __create_url_free_day(month: str, day: str) -> str:
-        return f"{URL}api/sites/appointment-slots/?date={day}/{month}/2023" \
-               f"&siteId={CITIES[REQUIRED_CITY]['id']}"
+        return f"""{URL}api/sites/appointment-slots/?date={day}/{month}/2023
+                    &siteId={CITIES[REQUIRED_CITY]['id']}"""
 
     def check_authorization(self) -> bool:
         """Check authorization with any url that requires it, e.g. START_DATE.
