@@ -1,9 +1,8 @@
 # Almaviva VAC auto appointment
 
 [Switch to Russian README](https://github.com/codingoleg/Almaviva_VAC_auto_appointment/blob/master/README.ru.md)\
-This script allows you to search for free spots and sign up at the visa 
-application center to apply for a visa to Italy through the site 
-https://ru.almaviva-visa.services. \
+This script allows you to search for free spots at the visa application center 
+of Italy to apply for a visa through site https://ru.almaviva-visa.services. \
 The script sends requests to the API and sees free spots, even if there are 
 none on the site. (It was empirically established that, if these 'invisible' 
 intervals exist, successful appointment is possible, but unlikely.)\
