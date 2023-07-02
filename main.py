@@ -2,7 +2,9 @@
 
 import requests
 from config import *
-from typing import Iterator, List, Dict
+from datetime import timedelta, datetime
+from http.client import RemoteDisconnected
+from random import randint
 from requests.exceptions import ConnectionError, ReadTimeout, ConnectTimeout
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -10,9 +12,9 @@ from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import TimeoutException
 from time import sleep
-from random import randint
-from datetime import timedelta, datetime
+from typing import Iterator, List, Dict
 from templates.ru.cities import CITIES
+from urllib3.exceptions import ProtocolError, MaxRetryError
 
 
 # TODO: Add logging
@@ -69,8 +71,8 @@ class Driver:
 class Appointment:
     @staticmethod
     def __create_url_free_day(month: str, day: str) -> str:
-        return f"""{URL}api/sites/appointment-slots/?date={day}/{month}/2023
-                    &siteId={CITIES[REQUIRED_CITY]['id']}"""
+        return f"{URL}api/sites/appointment-slots/?date={day}/{month}/2023" \
+               f"&siteId={CITIES[REQUIRED_CITY]['id']}"
 
     def check_authorization(self) -> bool:
         """Check authorization with any url that requires it, e.g. START_DATE.
@@ -95,9 +97,10 @@ class Appointment:
                     self.__create_url_free_day(month, day),
                     headers=HEADERS
                 )
-            except (ConnectionError, ReadTimeout, ConnectTimeout) as error:
-                print('  ', error)
-                print('   Trying again...')
+            except (ConnectionError, ReadTimeout, ConnectTimeout,
+                    RemoteDisconnected, ProtocolError, MaxRetryError) as error:
+                print(f'\t{error}')
+                print('\tTrying again...')
             else:
                 break
 
@@ -108,7 +111,7 @@ class Appointment:
                 if line and line['freeSpots']:
                     yield line['time']
         else:
-            print(response.status_code, response.reason, end='. ')
+            print(f'\t{response.status_code} {response.reason}.', end=' ')
             print('Trying again in 1 minute...')
             sleep(60)
 
@@ -130,26 +133,25 @@ class Appointment:
 
         return TEMPLATE
 
-    def create_appointment(self, month: str, day: str,
-                           time_interval: str) -> bool:
+    def create_app(self, month: str, day: str, time_interval: str) -> bool:
         """Try to create an appointment with the completed template.
         Returns:
             True, if an appointment was successfully created. False otherwise.
         """
-        api_create_an_appointment = \
-            URL + 'api/save-reservation/?online=False&reference='
+        api_create_app = URL + 'api/save-reservation/?online=False&reference='
         completed_template = self.complete_template(month, day, time_interval)
 
         while True:
             try:
                 response = requests.post(
-                    url=api_create_an_appointment,
+                    url=api_create_app,
                     json=completed_template,
                     headers=HEADERS
                 )
-            except (ConnectionError, ReadTimeout, ConnectTimeout) as error:
-                print(error.rjust(4))
-                print('Trying again...'.rjust(4))
+            except (ConnectionError, ReadTimeout, ConnectTimeout,
+                    RemoteDisconnected, ProtocolError, MaxRetryError) as error:
+                print(f'\t{error}')
+                print('\tTrying again...')
             else:
                 break
 
@@ -161,17 +163,16 @@ class Appointment:
         else:
             current_time = datetime.now().strftime('%H:%M')
             # Prints only 'invisible' time intervals here. See README
-            print(f'[{current_time}] {time_interval} is occupied'.rjust(4))
+            print(f'\t[{current_time}] {time_interval} is occupied')
             return False
 
     @staticmethod
-    def check_appointment():
+    def check_app():
         """Checks for an appointment existence"""
         api_profile = f'{URL}api/user/profile'
         client_id = requests.get(api_profile, headers=HEADERS).json()['id']
-        api_view_an_appointment = f'{URL}api/group/client/{client_id}'
-        response = requests.get(
-            api_view_an_appointment, headers=HEADERS).json()[0]
+        api_view_app = f'{URL}api/group/client/{client_id}'
+        response = requests.get(api_view_app, headers=HEADERS).json()[0]
 
         if response:
             print(response['appointment']['appointmentDate'], end='. ')
@@ -192,7 +193,7 @@ class Dates:
         for day in range(int((FINAL_DATE - START_DATE).days)):
             yield START_DATE + timedelta(day)
 
-    def get_date(self) -> Iterator[List]:
+    def get_single_date(self) -> Iterator[List]:
         """Returns:
             Iterator[List[Month, Day]]."""
         return (single_date.strftime("%m %d").split()
@@ -200,23 +201,22 @@ class Dates:
 
 
 def main():
-    appointment = Appointment()
+    app = Appointment()
 
-    if not appointment.check_authorization():
+    if not app.check_authorization():
         Driver().login()
         with open('auth_token') as cookie_token:
             HEADERS["Authorization"] = 'Bearer ' + cookie_token.read()
 
     while True:
-        for single_date in Dates().get_date():
+        for single_date in Dates().get_single_date():
             month, day = single_date[0].zfill(2), single_date[1].zfill(2)
             # Skip saturdays and sundays
             if date(2023, int(month), int(day)).weekday() < 5:
-                free_day = appointment.find_free_day(month, day)
+                free_day = app.find_free_day(month, day)
                 for time_interval in free_day:
                     if time_interval in REQUIRED_TIME \
-                            and appointment.create_appointment(
-                        month, day, time_interval):
+                            and app.create_app(month, day, time_interval):
                         return
                     sleep(randint(1, 4))
 
