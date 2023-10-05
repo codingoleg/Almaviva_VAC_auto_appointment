@@ -1,6 +1,6 @@
 # Almaviva VAC auto appointment
 
-Скрипт позволяет искать свободные окна в визовом центре Италии https://ru.almaviva-visa.services. \
+Скрипт позволяет искать свободные окна в визовом центре Италии https://ru.almaviva-visa.services.
 
 ## Installation
 1. Клонируйте репозиторий:
